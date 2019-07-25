@@ -1,0 +1,27 @@
+#!/bin/bash
+#./runprogram --numCashiers=3 --numCustomers=100 --timePerCustomer=3
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --numCashiers=*)
+      numCashiers="${1#*=}"
+      ;;
+    --numCustomers=*)
+      numCustomers="${1#*=}"
+      ;;
+    --timePerCustomer=*)
+			timePerCustomer="${1#*=}"
+			;;
+
+    *)
+      printf "***************************\n"
+      printf "* Error: Invalid argument.*\n"
+      printf "***************************\n"
+      exit 1
+  esac
+  shift
+ done
+
+cd src
+javac BankSimulator.java
+
+java BankSimulator "$numCashiers" "$numCustomers" "$timePerCustomer"
