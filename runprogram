@@ -13,15 +13,17 @@ while [ $# -gt 0 ]; do
 			;;
 
     *)
-      printf "***************************\n"
-      printf "* Error: Invalid argument.*\n"
-      printf "***************************\n"
+      printf "Provide arguments in the following format/sequence : --numCashiers=<numCashiers> --numCustomers=<numCustomers> --timePerCustomer=<timePerCustomer> \n"
       exit 1
   esac
   shift
  done
 
-cd src
-javac BankSimulator.java
+rm -rf build
+mkdir -p build
 
+cd src
+javac BankSimulator.java -d ../build
+
+cd ../build
 java BankSimulator "$numCashiers" "$numCustomers" "$timePerCustomer"
